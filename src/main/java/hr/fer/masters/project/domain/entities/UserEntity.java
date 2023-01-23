@@ -1,6 +1,5 @@
 package hr.fer.masters.project.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +15,12 @@ public class UserEntity {
     @Id
     private String id;
     private String username;
+    private String workingHoursStart;
+    private String workingHoursEnd;
+
+    public UserEntity(String username) {
+        this.username = username;
+        this.workingHoursStart = "09:00";
+        this.workingHoursEnd = "17:00";
+    }
 }

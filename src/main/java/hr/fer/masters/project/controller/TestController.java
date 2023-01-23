@@ -14,8 +14,4 @@ public class TestController {
 
     private UserService userService;
 
-    @GetMapping("/")
-    public UserEntity getUser() {
-        return userService.getUserByUsername("veki");
-    }
 }
