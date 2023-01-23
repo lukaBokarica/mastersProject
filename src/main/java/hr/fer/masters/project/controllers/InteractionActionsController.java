@@ -18,25 +18,23 @@ public class InteractionActionsController {
 
     @PostMapping("/actions")
     public void handleButtonClicked(@RequestBody String payload) throws ParseException, UnsupportedEncodingException {
-        // Parse the payload into a JSON object
+        // JSON PARSE
         String s = URLDecoder.decode(payload, StandardCharsets.UTF_8);
         s = s.substring(8);
         Object obj = new JSONParser().parse(s);
         JSONObject jo = (JSONObject) obj;
+
+        // ACTION
         Object actions = jo.get("actions");
         List<Object> actionsList = (List<Object>) actions;
         JSONObject action = (JSONObject) actionsList.get(0);
 
-        // Extract the value of the button that was clicked
-        /*String value = json.getJSONObject("actions").getString("value");
+        // USER
+        Object userObject = jo.get("user");
+        JSONObject user = (JSONObject) userObject;
+        String username = (String) user.get("username");
 
-        // Extract the callback_id of the message that the button belongs to
-        String callbackId = json.getString("callback_id");
-
-        // Extract the user_id of the user who clicked the button
-        String userId = json.getString("user_id");*/
-
-        // Use the extracted information to perform the desired action
+        // HANDLING ACTIONS
         if (action.get("action_id").equals("actionId-0")) {
             System.out.println("vrijeme start promijenjeno");
         } else if (action.get("action_id").equals("actionId-1")) {
