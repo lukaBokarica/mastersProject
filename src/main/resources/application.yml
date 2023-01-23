@@ -2,3 +2,8 @@ logging.level:
   com.slack.api: DEBUG
 server:
   port: 3000
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://user:12345@cluster0.6rmyfgr.mongodb.net/?retryWrites=true&w=majority
+      database: day2day

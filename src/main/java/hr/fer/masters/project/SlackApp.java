@@ -2,6 +2,8 @@ package hr.fer.masters.project;
 
 import com.slack.api.bolt.App;
 import com.slack.api.model.block.element.TimePickerElement;
+import hr.fer.masters.project.domain.repositories.UserRepository;
+import hr.fer.masters.project.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import static com.slack.api.model.block.Blocks.*;
@@ -38,7 +40,6 @@ public class SlackApp {
 
             return ctx.ack();
         });
-
 
         return app;
     }
