@@ -4,8 +4,6 @@ import hr.fer.masters.project.domain.entities.UserEntity;
 import hr.fer.masters.project.domain.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -22,9 +20,14 @@ public class UserService {
     }
 
     public UserEntity create(String username) {
-        UserEntity user = new UserEntity(username);
-        var savedEntity = userRepository.save(user);
-        return savedEntity;
+        Optional<UserEntity> existingUser = userRepository.findByUsername(username);
+        boolean userExists = existingUser.isPresent();
+        if(!userExists) {
+            UserEntity user = new UserEntity(username);
+            var savedEntity = userRepository.save(user);
+            return savedEntity;
+        }
+        return existingUser.get();
     }
 
     public UserEntity updateWorkingHoursStart(String username, String workingHoursStart) {
