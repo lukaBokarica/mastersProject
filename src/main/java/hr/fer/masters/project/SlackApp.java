@@ -24,8 +24,8 @@ public class SlackApp {
                             divider(),
                             actions(actions -> actions
                                     .elements(asElements(
-                                            timePicker(tp -> tp.initialTime("13:37").placeholder(plainText(pt -> pt.text("Select time").emoji(true))).actionId("actionId-0")),
-                                            timePicker(tp -> tp.initialTime("13:37").placeholder(plainText(pt -> pt.text("Select time").emoji(true))).actionId("actionId-1")),
+                                            timePicker(tp -> tp.initialTime("09:0").placeholder(plainText(pt -> pt.text("Select time").emoji(true))).actionId("actionId-0")),
+                                            timePicker(tp -> tp.initialTime("17:00").placeholder(plainText(pt -> pt.text("Select time").emoji(true))).actionId("actionId-1")),
                                             button(b -> b.text(plainText(pt -> pt.text("Set working hours").emoji(true))).value("click_me_123").actionId("actionId-2"))
                                     ))
                             )
