@@ -102,10 +102,10 @@ public class InteractionActionsController {
             Slack slack = Slack.getInstance();
             // Load an env variable
             // If the token is a bot token, it starts with `xoxb-` while if it's a user token, it starts with `xoxp-`
-            String botToken = "xoxb-4211602315858-4462905584498-Hm3wXGcfArRNE19WLktJXoP8";
+            // String botToken = "xoxb-4211602315858-4462905584498-Hm3wXGcfArRNE19WLktJXoP8";
 
             // Initialize an API Methods client with the given token
-            MethodsClient methods = slack.methods(botToken);
+            MethodsClient methods = slack.methods("");
 
             // Build a request object
             ChatPostMessageRequest request = ChatPostMessageRequest.builder()
