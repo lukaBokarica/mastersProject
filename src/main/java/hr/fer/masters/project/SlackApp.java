@@ -1,6 +1,7 @@
 package hr.fer.masters.project;
 
 import com.slack.api.bolt.App;
+import com.slack.api.methods.request.users.profile.UsersProfileGetRequest;
 import com.slack.api.methods.response.views.ViewsPublishResponse;
 import com.slack.api.model.block.composition.PlainTextObject;
 import com.slack.api.model.view.View;
@@ -15,6 +16,8 @@ import static com.slack.api.model.block.Blocks.asBlocks;
 import static com.slack.api.model.block.composition.BlockCompositions.*;
 import static com.slack.api.model.view.Views.*;
 import com.slack.api.model.event.AppHomeOpenedEvent;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import static com.slack.api.model.block.element.BlockElements.*;
 
 @AllArgsConstructor
@@ -31,6 +34,10 @@ public class SlackApp {
 
         // AppHomeOpenedEvent
         app.event(AppHomeOpenedEvent.class, (payload, ctx) -> {
+
+            // String email = ctx.client().usersProfileGet(UsersProfileGetRequest.builder().build()).getProfile().getEmail();
+            // System.out.println(email);
+
             String userId = payload.getEvent().getUser();
             userService.create(userId);
             UserEntity user = userService.getUserBySlackUserId(userId);

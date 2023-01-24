@@ -1,8 +1,12 @@
 package hr.fer.masters.project.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.slack.api.Slack;
 import com.slack.api.bolt.App;
+import com.slack.api.methods.MethodsClient;
 import com.slack.api.methods.SlackApiException;
+import com.slack.api.methods.request.chat.ChatPostMessageRequest;
+import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import hr.fer.masters.project.models.Action;
 import hr.fer.masters.project.models.AppHomeViewCustom;
 import hr.fer.masters.project.models.parsers.ActionParser;
@@ -58,7 +62,7 @@ public class InteractionActionsController {
             AppHomeViewCustom appHomeViewCustom = new AppHomeViewCustom(selectedUserId, userService);
 
             app.client().viewsPublish(r -> r
-                    .userId(selectedUserId)
+                    .userId(slackUserId)
                     .view(appHomeViewCustom.reloadAppHomeView(true))
             );
         } else if (action.get("action_id").equals("actionId-startTimeChange")) {
@@ -94,6 +98,23 @@ public class InteractionActionsController {
                     .userId(slackUserId)
                     .view(appHomeViewCustom.reloadAppHomeView(false))
             );
+
+            Slack slack = Slack.getInstance();
+            // Load an env variable
+            // If the token is a bot token, it starts with `xoxb-` while if it's a user token, it starts with `xoxp-`
+            String botToken = "xoxb-4211602315858-4462905584498-Hm3wXGcfArRNE19WLktJXoP8";
+
+            // Initialize an API Methods client with the given token
+            MethodsClient methods = slack.methods(botToken);
+
+            // Build a request object
+            ChatPostMessageRequest request = ChatPostMessageRequest.builder()
+                    .channel("#daily") // Use a channel ID `C1234567` is preferable
+                    .text(":clock1: Hey, " + username + " just updated his/hers working hours!")
+                    .build();
+
+            // Get a response as a Java object
+            ChatPostMessageResponse response = methods.chatPostMessage(request);
         }
     }
 }

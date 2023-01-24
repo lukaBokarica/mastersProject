@@ -35,7 +35,7 @@ public class AppHomeViewCustom {
         blockElementsList.clear();
         blockElementsList.add(header(h -> {
             PlainTextObject textObject = new PlainTextObject();
-            textObject.setText("Welcome back " + username + "!");
+            textObject.setText("Welcome back!");
             h.text(textObject);
             return h;
         }));
@@ -66,19 +66,9 @@ public class AppHomeViewCustom {
             blockElementsList.add(header(h -> {
                 PlainTextObject textObject = new PlainTextObject();
                 textObject.setEmoji(true);
-                textObject.setText("Their schedule for the day");
+                textObject.setText(username + "'s schedule for the day");
                 h.text(textObject);
                 return h;
-            }));
-
-            blockElementsList.add(context(c -> {
-                List<ContextBlockElement> elements = new ArrayList<>();
-                PlainTextObject textObject = new PlainTextObject();
-                textObject.setEmoji(true);
-                textObject.setText(username);
-                elements.add(textObject);
-                c.elements(elements);
-                return c;
             }));
 
             blockElementsList.add(header(h -> {
@@ -97,7 +87,6 @@ public class AppHomeViewCustom {
         }
         return blockElementsList;
     }
-
 
     public View reloadAppHomeView(Boolean scheduleShown) {
         View appHomeView = view(view -> view
