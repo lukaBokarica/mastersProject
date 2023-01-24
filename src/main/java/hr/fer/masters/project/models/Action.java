@@ -1,5 +1,7 @@
 package hr.fer.masters.project.models;
 
+import java.util.List;
+
 public class Action {
     private String actionId;
     private String type;
